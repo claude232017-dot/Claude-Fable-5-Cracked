@@ -81,7 +81,8 @@ never breaks.
 
 | Path | What it is |
 |------|-----------|
-| `CLAUDE.md` | Active config = header + verbatim Fable 5 prompt |
+| `CLAUDE.md` | Active config = verbatim Fable 5 behavioral core (~6k tokens) |
+| `CLAUDE-full.md` | Full verbatim Fable 5 prompt (reference copy) |
 | `.claude/skills/refresh-fable5-prompt/` | The refresh skill |
 | `.claude/skills/llm-council/` | The 5-advisor decision skill |
 | `Fable-5-Cracked/backups/` | Verbatim offline backups (survive URL going down) |

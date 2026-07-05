@@ -20,7 +20,10 @@ reached, it keeps and reuses the existing local backup so the config never break
 - **URL:** `https://raw.githubusercontent.com/asgeirtj/system_prompts_leaks/main/Anthropic/claude-fable-5.md`
 - **Local backup:** `Fable-5-Cracked/backups/claude-fable-5.md`
 - **Header/template:** `Fable-5-Cracked/assets/claude-md-header.md`
-- **Generated outputs:** `CLAUDE.md` (repo root) and `Fable-5-Cracked/CLAUDE.md`
+- **Full-copy header:** `Fable-5-Cracked/assets/claude-md-full-header.md`
+- **Generated outputs:** `CLAUDE.md` (ACTIVE: verbatim `<claude_behavior>` core, ~6k tokens)
+  and `CLAUDE-full.md` (full verbatim prompt, ~47k tokens, reference only) — both at repo
+  root and mirrored in `Fable-5-Cracked/`
 
 ## What to do when invoked
 
@@ -31,8 +34,11 @@ reached, it keeps and reuses the existing local backup so the config never break
    ```
 
    This fetches the URL, updates the backup only if a valid non-trivial file comes back,
-   falls back to the existing backup if the URL is offline, and rebuilds both `CLAUDE.md`
-   files as `header + verbatim prompt`.
+   falls back to the existing backup if the URL is offline, extracts the verbatim
+   `<claude_behavior>` block as the active `CLAUDE.md` (keeping sessions ~44k tokens
+   lighter), and writes the full verbatim prompt to `CLAUDE-full.md`. If the upstream
+   format ever changes and the block can't be found, it falls back to the full prompt
+   for `CLAUDE.md` so nothing breaks.
 
 2. Confirm the result to the user: report whether the content came from the **live URL**
    or the **offline backup**, the new line/byte count, and that both `CLAUDE.md` files

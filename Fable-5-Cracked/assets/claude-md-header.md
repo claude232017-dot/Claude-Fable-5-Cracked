@@ -1,34 +1,32 @@
 <!-- ============================================================= -->
-<!-- FABLE 5 — LOCAL ACTIVE CONFIGURATION                          -->
-<!-- This file is generated. Do NOT hand-edit below the marker.    -->
-<!-- To update, run the `refresh-fable5-prompt` skill              -->
-<!-- (say: "refresh the fable 5 prompt").                          -->
+<!-- FABLE 5 — LOCAL ACTIVE CONFIGURATION (OPTIMIZED)              -->
+<!-- Generated file. Do NOT hand-edit below the marker.            -->
+<!-- To update, run the `refresh-fable5-prompt` skill.             -->
 <!-- ============================================================= -->
 
-# Fable 5 — Cracked (Local Behavioral Configuration)
+# Fable 5 — Cracked (Active Behavioral Configuration)
 
-**What this is:** the full Claude Fable 5 system prompt, stored locally and set as the
-active `CLAUDE.md` for this repo. Any model that opens this repo (Sonnet, Opus, Haiku,
-or Fable 5 itself) reads the instructions below and behaves according to them.
+This is the **behavioral core** of the Claude Fable 5 system prompt — the
+`<claude_behavior>` block, extracted **verbatim** from the source. It contains
+everything that actually shapes behavior: identity, refusal handling, child safety,
+tone and formatting, user wellbeing, evenhandedness, handling mistakes, and knowledge
+cutoff. Any model running in this repo follows these rules.
 
-**What this gives you (permanent, offline):**
-- The complete behavioral spec: persona, rules, formatting, refusal boundaries, tool
-  and search guidance, and the product/identity framing of Fable 5.
-- Consistent *behavior* across whatever model runs it. The rules are the same every time.
-- Full offline durability: a verbatim copy lives in `Fable-5-Cracked/backups/` and is
-  used automatically if the source URL ever goes offline.
+**Why this file is trimmed:** the full Fable 5 prompt is ~48,000 tokens, and ~90% of it
+configures claude.ai platform machinery (memory database, artifact storage APIs, image
+search, MCP pickers, citations) that does not exist in Claude Code. Loading all of it
+would burn a quarter of the context window every session for zero behavioral gain.
+This file keeps the part that matters, word for word.
 
-**What it honestly cannot do:** a text prompt does not transfer a model's underlying
-intelligence, reasoning depth, or "IQ" — those live in the model weights, not here.
-So *behavior/rules* are cloned and permanent; *raw capability* is still bounded by
-whichever model is actually running. That is the truthful scope of this setup.
+**Nothing is lost:**
+- Full verbatim prompt: `CLAUDE-full.md` (repo root) and `Fable-5-Cracked/backups/claude-fable-5.md`
+- Refresh from source (offline-safe): say "refresh the fable 5 prompt" or run `bash Fable-5-Cracked/refresh.sh`
+- Source: https://raw.githubusercontent.com/asgeirtj/system_prompts_leaks/main/Anthropic/claude-fable-5.md
 
-**Source:** https://raw.githubusercontent.com/asgeirtj/system_prompts_leaks/main/Anthropic/claude-fable-5.md
-**Local backup:** `Fable-5-Cracked/backups/claude-fable-5.md`
-**Refresh:** run the `refresh-fable5-prompt` skill, or `bash Fable-5-Cracked/refresh.sh`
+**Honest scope:** this clones Fable 5's *behavior* (rules, persona, boundaries) — not the
+model's underlying intelligence, which lives in model weights. Behavior is consistent on
+any model; raw capability follows the model actually running. Dates and product facts
+below are verbatim from the source and reflect when it was captured, not today.
 
-> Note: some lines below (e.g. `<budget:token_budget>`, internal placeholder tags) are
-> inert outside Anthropic's real serving harness. They are preserved verbatim for fidelity.
-
-<!-- ================= VERBATIM FABLE 5 PROMPT BELOW ================= -->
+<!-- ============ VERBATIM <claude_behavior> BLOCK BELOW ============ -->
 
