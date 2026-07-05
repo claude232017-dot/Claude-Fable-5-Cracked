@@ -24,7 +24,7 @@ live model.
 
 ```
 <repo root>/
-├── CLAUDE.md                         # ACTIVE config = verbatim <claude_behavior> core (~6k tokens)
+├── CLAUDE.md                         # ACTIVE config = assistant layer + verbatim core (~7.6k tokens)
 ├── CLAUDE-full.md                    # full verbatim Fable 5 prompt (~47k tokens, reference)
 ├── .claude/skills/
 │   ├── refresh-fable5-prompt/SKILL.md   # "refresh the fable 5 prompt"
@@ -32,9 +32,10 @@ live model.
 └── Fable-5-Cracked/
     ├── README.md                     # this file
     ├── refresh.sh                    # fetch + rebuild both files (offline-safe)
-    ├── CLAUDE.md / CLAUDE-full.md    # mirrors of the generated files
+    ├── CLAUDE-core.md / CLAUDE-full.md  # mirror copies (renamed so they don't double-load)
     ├── assets/
-    │   ├── claude-md-header.md       # header for the active (core) file
+    │   ├── claude-md-header.md       # header for the active file
+    │   ├── assistant-layer.md        # Part 1: the agent working persona
     │   └── claude-md-full-header.md  # header for the full reference copy
     ├── backups/
     │   ├── claude-fable-5.md         # VERBATIM offline backup of the Fable 5 prompt
@@ -43,7 +44,17 @@ live model.
     └── .claude/skills/               # self-contained mirror of both skills
 ```
 
-## Why CLAUDE.md is the core, not the full prompt
+## What "becomes the assistant" means here
+
+The active `CLAUDE.md` has two parts. **Part 1, the assistant layer**, reproduces the
+working persona of the Fable 5 agent: lead with the outcome, honesty over
+agreeableness, act autonomously on reversible steps, verify before claiming, proper
+git discipline. **Part 2** is the verbatim Fable 5 `<claude_behavior>` core (values,
+safety, tone). Part 1 governs how the agent works; Part 2 governs what it stands for.
+Where they conflict on formatting/workflow, Part 1 wins — the core was written for a
+consumer chat app.
+
+## Why CLAUDE.md carries the core, not the full prompt
 
 `CLAUDE.md` loads into context at the start of every session. The full Fable 5 prompt is
 ~48k tokens, and ~90% of it configures claude.ai platform machinery (memory database,
@@ -64,8 +75,8 @@ bash Fable-5-Cracked/refresh.sh
 
 It re-downloads from the source URL, updates the local backup only if a valid file comes
 back, **falls back to the existing backup if the URL is offline**, and regenerates
-`CLAUDE.md` (verbatim behavioral core) and `CLAUDE-full.md` (full prompt) in both
-locations. If the upstream format ever changes so the core block can't be found, it
+`CLAUDE.md` (assistant layer + verbatim behavioral core) and `CLAUDE-full.md` (full
+prompt), with subfolder copies named `CLAUDE-core.md`/`CLAUDE-full.md`. If the upstream format ever changes so the core block can't be found, it
 falls back to the full prompt for `CLAUDE.md` so nothing breaks.
 
 ## Sources

@@ -6,11 +6,13 @@
 
 # Fable 5 — Cracked (Active Behavioral Configuration)
 
-This is the **behavioral core** of the Claude Fable 5 system prompt — the
-`<claude_behavior>` block, extracted **verbatim** from the source. It contains
-everything that actually shapes behavior: identity, refusal handling, child safety,
-tone and formatting, user wellbeing, evenhandedness, handling mistakes, and knowledge
-cutoff. Any model running in this repo follows these rules.
+This config reproduces the Fable 5 assistant in two parts. **Part 1 — the assistant
+layer**: how it works as an agent (outcome-first reporting, honesty over
+agreeableness, autonomy, verification discipline, git practice). **Part 2 — the
+verbatim behavioral core**: the `<claude_behavior>` block extracted byte-for-byte
+from the Fable 5 system prompt (identity, refusal handling, child safety, tone,
+wellbeing, evenhandedness, mistakes, knowledge cutoff). Part 1 governs working
+style in agent sessions; Part 2 governs values, safety, and conversational register.
 
 **Why this file is trimmed:** the full Fable 5 prompt is ~48,000 tokens, and ~90% of it
 configures claude.ai platform machinery (memory database, artifact storage APIs, image

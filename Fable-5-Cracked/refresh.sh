@@ -17,6 +17,7 @@ URL="https://raw.githubusercontent.com/asgeirtj/system_prompts_leaks/main/Anthro
 BACKUP="$SCRIPT_DIR/backups/claude-fable-5.md"
 HEADER_CORE="$SCRIPT_DIR/assets/claude-md-header.md"
 HEADER_FULL="$SCRIPT_DIR/assets/claude-md-full-header.md"
+ASSISTANT_LAYER="$SCRIPT_DIR/assets/assistant-layer.md"
 TMP="$(mktemp)"
 
 echo "→ Fetching Fable 5 prompt from source…"
@@ -46,15 +47,19 @@ if [ ! -s "$CORE" ]; then
   cp "$BACKUP" "$CORE"
 fi
 
-build() { # build <header> <body> <out>
-  cat "$1" "$2" > "$3"
-  echo "✓ Wrote $3 ($(wc -l < "$3") lines, ~$(( $(wc -c < "$3") / 4 )) tokens)."
+build() { # build <out> <part...>
+  local out="$1"; shift
+  cat "$@" > "$out"
+  echo "✓ Wrote $out ($(wc -l < "$out") lines, ~$(( $(wc -c < "$out") / 4 )) tokens)."
 }
 
-build "$HEADER_CORE" "$CORE"   "$ROOT/CLAUDE.md"
-build "$HEADER_CORE" "$CORE"   "$SCRIPT_DIR/CLAUDE.md"
-build "$HEADER_FULL" "$BACKUP" "$ROOT/CLAUDE-full.md"
-build "$HEADER_FULL" "$BACKUP" "$SCRIPT_DIR/CLAUDE-full.md"
+# Active config: header + assistant layer (agent behavior) + verbatim core.
+# The subfolder copy is named CLAUDE-core.md so it does NOT auto-load a second
+# time when working inside Fable-5-Cracked/ (any file named CLAUDE.md would).
+build "$ROOT/CLAUDE.md"                 "$HEADER_CORE" "$ASSISTANT_LAYER" "$CORE"
+build "$SCRIPT_DIR/CLAUDE-core.md"      "$HEADER_CORE" "$ASSISTANT_LAYER" "$CORE"
+build "$ROOT/CLAUDE-full.md"            "$HEADER_FULL" "$BACKUP"
+build "$SCRIPT_DIR/CLAUDE-full.md"      "$HEADER_FULL" "$BACKUP"
 rm -f "$CORE"
 
 echo "Done. Regenerated at $(date -u +%Y-%m-%dT%H:%M:%SZ)"

@@ -21,9 +21,11 @@ reached, it keeps and reuses the existing local backup so the config never break
 - **Local backup:** `Fable-5-Cracked/backups/claude-fable-5.md`
 - **Header/template:** `Fable-5-Cracked/assets/claude-md-header.md`
 - **Full-copy header:** `Fable-5-Cracked/assets/claude-md-full-header.md`
-- **Generated outputs:** `CLAUDE.md` (ACTIVE: verbatim `<claude_behavior>` core, ~6k tokens)
-  and `CLAUDE-full.md` (full verbatim prompt, ~47k tokens, reference only) — both at repo
-  root and mirrored in `Fable-5-Cracked/`
+- **Assistant layer:** `Fable-5-Cracked/assets/assistant-layer.md` (Part 1: agent persona)
+- **Generated outputs:** `CLAUDE.md` (ACTIVE: assistant layer + verbatim `<claude_behavior>`
+  core, ~7.6k tokens) and `CLAUDE-full.md` (full verbatim prompt, ~47k tokens, reference).
+  Subfolder copies are `Fable-5-Cracked/CLAUDE-core.md` and `CLAUDE-full.md` — deliberately
+  not named CLAUDE.md so they don't auto-load a second time.
 
 ## What to do when invoked
 
